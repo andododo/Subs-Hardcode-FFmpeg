@@ -1,7 +1,7 @@
 # Subs Hardcode FFmpeg
 I use this hand-in-hand with [anipy-cli](https://github.com/sdaqo/anipy-cli). Sometimes downloaded videos does not come with hardcoded subs, and just downloads a separate .vtt file. So I just merge them using this. 
 
-Important to note: this is hardcoding the subs ONLY, I have a separate script for embedding the .vtt file (faster, like seconds).
+Important to note: this is hardcoding the subs ONLY, I have a separate script for embedding the .vtt file (faster, like seconds). Check out [Subs-Embed](https://github.com/andododo/Subs-Embed).
 
 
 ## Quality Tweaks
