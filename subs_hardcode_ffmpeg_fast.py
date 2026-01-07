@@ -32,33 +32,34 @@ def burn_and_clean():
     print("=== MP4 + VTT Hardcode (GPU NVENC) ===")
     print("Burning subtitles and deleting originals...\n")
 
-    for mp4 in glob("*.mp4"):
-        vtt = find_matching_vtt(mp4)
+    for video in glob("*.mp4") + glob("*.mkv"):
+        vtt = find_matching_vtt(video)
 
         if not vtt or not os.path.exists(vtt):
-            print(f"⚠️ No matching .vtt found for: {mp4}\n")
+            print(f"⚠️ No matching .vtt found for: {video}\n")
             continue
 
-        temp_output = f"temp_{mp4}"
-        vtt_path = vtt.replace("\\", "/")  # IMPORTANT for Windows
+        temp_output = f"temp_{os.path.splitext(video)[0]}.mp4"
+        vtt_path = vtt.replace("\\", "/")
 
-        print(f"🔥 Burning: {mp4} + {vtt}")
+        print(f"🔥 Burning: {video} + {vtt}")
+
 
         try:
             subprocess.run([
                 "ffmpeg",
                 "-hwaccel", "cuda",
-                "-i", mp4,
+                "-i", video,
                 "-vf", f"subtitles='{vtt_path}'",
                 "-c:v", "h264_nvenc",
-                "-preset", "p5",        # p6 = faster, p4 = higher quality
-                "-cq", "18",
+                "-preset", "p6",        
+                "-cq", "20",
                 "-c:a", "copy",
                 temp_output
             ], check=True)
 
             if os.path.exists(temp_output):
-                if safe_replace(temp_output, mp4):
+                if safe_replace(temp_output, video):
                     if safe_remove(vtt):
                         print(f"✅ Success! Burned & deleted: {vtt}\n")
                     else:
