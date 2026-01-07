@@ -4,6 +4,12 @@ I use this hand-in-hand with [anipy-cli](https://github.com/sdaqo/anipy-cli). So
 Important to note: this is hardcoding the subs ONLY, I have a separate script for embedding the .vtt file (faster, like seconds). Check out [Subs-Embed](https://github.com/andododo/Subs-Embed).
 
 
+## How to use
+1. Just place the `.py` file inside the folder where the video and `.vtt` file is located.
+2. Run the `.py` file.
+3. The output will overwrite the source video, replacing with the merged video with embedded subs.
+
+
 ## Quality Tweaks
 
 You can expirement more by changing these values. Here are some examples which I find is the 'sweet-spot'.
